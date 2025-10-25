@@ -1,0 +1,1929 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart University — Презентация</title>
+  <meta name="color-scheme" content="dark light" />
+  
+  <!-- Современные шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <!-- Alpine.js для реактивности -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- AOS для анимаций -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Particles.js для фона -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <!-- Typed.js для анимации текста -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  
+  <!-- Chart.js для графиков -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Swiper для слайдов -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --secondary-light: #22d3ee;
+      --secondary-dark: #0891b2;
+      --accent: #10b981;
+      --accent-glow: #10b98133;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #0f172a;
+      --bg-tertiary: #1e293b;
+      --bg-card: rgba(30, 41, 59, 0.5);
+      
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      
+      --border: rgba(148, 163, 184, 0.1);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.25);
+      --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+      
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+      --gradient-accent: linear-gradient(135deg, var(--accent), var(--secondary));
+      --gradient-mesh: radial-gradient(at 40% 20%, hsla(240, 100%, 70%, 0.3) 0px, transparent 50%),
+                       radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.3) 0px, transparent 50%),
+                       radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.1) 0px, transparent 50%);
+    }
+
+    [data-theme="light"] {
+      --primary: #6366f1;
+      --primary-light: #a5b4fc;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --secondary-light: #67e8f9;
+      --secondary-dark: #0891b2;
+      --accent: #10b981;
+      
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.8);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --border: rgba(148, 163, 184, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+    }
+
+    /* Fixed Background Container */
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    /* Gradient Mesh Background */
+    .mesh-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-mesh);
+      opacity: 0.5;
+      animation: meshAnimation 15s ease infinite;
+    }
+
+    @keyframes meshAnimation {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* Main Content Container */
+    .main-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    /* Glass Morphism Effects */
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+    }
+
+    /* Glow Effects */
+    .glow {
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 30px var(--primary-light);
+    }
+
+    /* Modern Card */
+    .modern-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modern-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-2xl), 0 0 30px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    /* Swiper Custom Styles */
+    .swiper {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      z-index: 10;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .swiper-slide-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .swiper-slide-prev,
+    .swiper-slide-next {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .slide-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      animation: slideIn 0.6s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navigation */
+    .nav-controls {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+      z-index: 100;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .nav-btn.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-accent);
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Animated Heading */
+    .animated-heading {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s;
+      transform: rotate(45deg);
+    }
+
+    .feature-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-2xl);
+      border-color: var(--primary);
+    }
+
+    .icon-wrapper {
+      width: 56px;
+      height: 56px;
+      background: var(--gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    .icon-wrapper i {
+      color: white;
+      font-size: 24px;
+    }
+
+    /* Stats */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .team-member {
+      text-align: center;
+      padding: 32px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-2xl);
+      border-color: var(--primary);
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+    }
+
+    .member-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .member-role {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .member-skills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .skill-tag {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+      justify-content: center;
+    }
+
+    .tech-item {
+      padding: 12px 24px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-item::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.5s;
+    }
+
+    .tech-item:hover::before {
+      width: 100%;
+      height: 100%;
+      border-radius: 100px;
+    }
+
+    .tech-item:hover {
+      color: white;
+      transform: scale(1.1);
+      z-index: 1;
+    }
+
+    .tech-item span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Demo Section */
+    .demo-container {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .demo-preview {
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .browser-mockup {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .browser-header {
+      background: var(--bg-secondary);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: var(--danger); }
+    .dot-yellow { background: var(--warning); }
+    .dot-green { background: var(--accent); }
+
+    .browser-content {
+      padding: 24px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .demo-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .demo-features {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .demo-features li {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+    }
+
+    .demo-features li i {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 32px;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.6s;
+    }
+
+    .cta-button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+    }
+
+    /* Chart Container - Уменьшенные размеры */
+    .chart-container {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 250px;
+    }
+
+    .chart-container canvas {
+      max-height: 200px !important;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .demo-container {
+        grid-template-columns: 1fr;
+      }
+
+      .animated-heading {
+        font-size: 2rem;
+      }
+
+      .slide-content {
+        padding: 20px;
+      }
+
+      .nav-controls {
+        bottom: 20px;
+        padding: 8px 12px;
+      }
+
+      .nav-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .chart-container {
+        height: 200px;
+      }
+
+      .chart-container canvas {
+        max-height: 150px !important;
+      }
+    }
+
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Fixed Background Container -->
+  <div class="background-container">
+    <div id="particles-js"></div>
+    <div class="mesh-gradient"></div>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="main-container">
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+      <i class="ph-sun-bold" style="font-size: 24px; color: var(--text-primary);"></i>
+    </button>
+
+    <!-- Swiper Container -->
+    <div class="swiper" id="mainSwiper">
+      <div class="swiper-wrapper">
+        
+        <!-- Slide 1: Title -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <div style="text-align: center;">
+              <div data-aos="fade-down">
+                <h1 class="animated-heading">Smart University</h1>
+                <p style="font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 32px;">
+                  <span id="typed-text"></span>
+                </p>
+              </div>
+              
+              <div class="stats-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                  <div class="stat-number" data-count="120">0</div>
+                  <div class="stat-label">Активных пользователей</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" data-count="95">0</div>
+                  <div class="stat-label">% Удовлетворённость</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" data-count="24">0</div>
+                  <div class="stat-label">Часа поддержки</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number" data-count="3">0</div>
+                  <div class="stat-label">Интеграции</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 48px;" data-aos="fade-up" data-aos-delay="400">
+                <button class="cta-button" onclick="swiper.slideNext()">
+                  <i class="ph-rocket-launch-bold"></i>
+                  Начать презентацию
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">Проблема</h2>
+            
+            <div class="feature-grid">
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-wrapper">
+                  <i class="ph-warning-circle-bold"></i>
+                </div>
+                <h3 style="margin-bottom: 12px;">Потеря времени</h3>
+                <p style="color: var(--text-muted);">Студенты тратят до 30% учебного времени на поиск информации о расписании</p>
+              </div>
+              
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-wrapper">
+                  <i class="ph-x-circle-bold"></i>
+                </div>
+                <h3 style="margin-bottom: 12px;">Пропущенные занятия</h3>
+                <p style="color: var(--text-muted);">15% пар пропускается из-за несвоевременных уведомлений</p>
+              </div>
+              
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-wrapper">
+                  <i class="ph-chart-line-down-bold"></i>
+                </div>
+                <h3 style="margin-bottom: 12px;">Снижение успеваемости</h3>
+                <p style="color: var(--text-muted);">Отсутствие единой системы влияет на академические результаты</p>
+              </div>
+            </div>
+
+            <div class="chart-container" data-aos="fade-up" data-aos-delay="400">
+              <canvas id="problemChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">Решение</h2>
+            
+            <div class="demo-container">
+              <div class="demo-preview" data-aos="fade-right">
+                <div class="browser-mockup">
+                  <div class="browser-header">
+                    <div class="browser-dot dot-red"></div>
+                    <div class="browser-dot dot-yellow"></div>
+                    <div class="browser-dot dot-green"></div>
+                  </div>
+                  <div class="browser-content">
+                    <video class="demo-video" autoplay loop muted playsinline>
+                      <source src="video.mp4" type="video/mp4">
+                      <img src="img.jpeg" alt="Demo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="demo-info" data-aos="fade-left">
+                <h3>Единая платформа для университета</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6;">
+                  Smart University объединяет все необходимые инструменты для эффективного управления учебным процессом в одном месте.
+                </p>
+                
+                <ul class="demo-features">
+                  <li><i class="ph-check-circle-fill"></i> Автоматические уведомления</li>
+                  <li><i class="ph-check-circle-fill"></i> AI-рекомендации материалов</li>
+                  <li><i class="ph-check-circle-fill"></i> Интеграция с Telegram</li>
+                  <li><i class="ph-check-circle-fill"></i> Аналитика в реальном времени</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Technologies -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">Технологии</h2>
+            
+            <div class="tech-stack" data-aos="fade-up" data-aos-delay="100">
+              <div class="tech-item">
+                <span><i class="ph-node-plus-bold"></i> Node.js</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-telegram-logo-bold"></i> Telegram Bot API</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-database-bold"></i> SQLite</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-brain-bold"></i> OpenAI GPT</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-cloud-bold"></i> n8n</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-react-logo-bold"></i> React</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-chart-line-bold"></i> Chart.js</span>
+              </div>
+              <div class="tech-item">
+                <span><i class="ph-docker-logo-bold"></i> Docker</span>
+              </div>
+            </div>
+
+            <div class="chart-container" data-aos="fade-up" data-aos-delay="300">
+              <canvas id="architectureChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Team -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">Наша команда</h2>
+            
+            <div class="team-grid">
+              <div class="team-member" data-aos="zoom-in" data-aos-delay="100">
+                <div class="avatar">ШЭ</div>
+                <div class="member-name">Шайлообеков Эрмек</div>
+                <div class="member-role">Full Stack Developer & AI Engineer</div>
+                <div class="member-skills">
+                  <span class="skill-tag">Backend</span>
+                  <span class="skill-tag">Telegram Bot</span>
+                  <span class="skill-tag">AI/ML</span>
+                  <span class="skill-tag">Database</span>
+                </div>
+              </div>
+              
+              <div class="team-member" data-aos="zoom-in" data-aos-delay="200">
+                <div class="avatar">КК</div>
+                <div class="member-name">Кудайбердиев Кудайберген</div>
+                <div class="member-role">Frontend Developer & UI/UX Designer</div>
+                <div class="member-skills">
+                  <span class="skill-tag">Frontend</span>
+                  <span class="skill-tag">UI/UX</span>
+                  <span class="skill-tag">Презентация</span>
+                  <span class="skill-tag">Design</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="modern-card" style="margin-top: 48px; text-align: center;" data-aos="fade-up" data-aos-delay="400">
+              <h3 style="color: var(--primary); margin-bottom: 16px;">AuroraSys</h3>
+              <p style="color: var(--text-secondary);">Мы создаём будущее образования сегодня</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Metrics & Results -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">Результаты и метрики</h2>
+            
+            <div class="stats-container">
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Активных пользователей</div>
+              </div>
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Удовлетворённость</div>
+              </div>
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-number">-30%</div>
+                <div class="stat-label">Снижение пропусков</div>
+              </div>
+              <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-number">5 мин</div>
+                <div class="stat-label">Среднее время сессии</div>
+              </div>
+            </div>
+
+            <div class="chart-container" data-aos="fade-up" data-aos-delay="500">
+              <canvas id="metricsChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: Roadmap -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h2 class="animated-heading" data-aos="fade-right">План развития</h2>
+            
+            <div style="position: relative; margin-top: 48px;">
+              <!-- Timeline -->
+              <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--gradient-primary); transform: translateX(-50%);"></div>
+              
+              <div style="display: flex; flex-direction: column; gap: 32px;">
+                <div style="display: flex; align-items: center; gap: 32px;" data-aos="fade-right" data-aos-delay="100">
+                  <div style="flex: 1; text-align: right;">
+                    <div class="modern-card">
+                      <h3 style="color: var(--primary);">Q1 2024</h3>
+                      <p style="color: var(--text-secondary);">Интеграция с LMS системами</p>
+                    </div>
+                  </div>
+                  <div style="width: 20px; height: 20px; background: var(--primary); border-radius: 50%; z-index: 1; box-shadow: 0 0 20px var(--primary);"></div>
+                  <div style="flex: 1;"></div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 32px;" data-aos="fade-left" data-aos-delay="200">
+                  <div style="flex: 1;"></div>
+                  <div style="width: 20px; height: 20px; background: var(--secondary); border-radius: 50%; z-index: 1; box-shadow: 0 0 20px var(--secondary);"></div>
+                  <div style="flex: 1; text-align: left;">
+                    <div class="modern-card">
+                      <h3 style="color: var(--secondary);">Q2 2024</h3>
+                      <p style="color: var(--text-secondary);">Мобильное приложение iOS/Android</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 32px;" data-aos="fade-right" data-aos-delay="300">
+                  <div style="flex: 1; text-align: right;">
+                    <div class="modern-card">
+                      <h3 style="color: var(--accent);">Q3 2024</h3>
+                      <p style="color: var(--text-secondary);">AI-модуль прогнозирования успеваемости</p>
+                    </div>
+                  </div>
+                  <div style="width: 20px; height: 20px; background: var(--accent); border-radius: 50%; z-index: 1; box-shadow: 0 0 20px var(--accent);"></div>
+                  <div style="flex: 1;"></div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 32px;" data-aos="fade-left" data-aos-delay="400">
+                  <div style="flex: 1;"></div>
+                  <div style="width: 20px; height: 20px; background: var(--warning); border-radius: 50%; z-index: 1; box-shadow: 0 0 20px var(--warning);"></div>
+                  <div style="flex: 1; text-align: left;">
+                    <div class="modern-card">
+                      <h3 style="color: var(--warning);">Q4 2024</h3>
+                      <p style="color: var(--text-secondary);">Масштабирование на 10+ университетов</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Contact -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <div style="text-align: center;">
+              <h2 class="animated-heading" data-aos="zoom-in">Спасибо за внимание!</h2>
+              
+              <p style="font-size: 1.25rem; color: var(--text-secondary); margin: 32px 0;" data-aos="fade-up" data-aos-delay="100">
+                Готовы ответить на ваши вопросы
+              </p>
+
+              <div class="modern-card" style="max-width: 600px; margin: 48px auto;" data-aos="fade-up" data-aos-delay="200">
+                <h3 style="color: var(--primary); margin-bottom: 24px;">Контакты</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 16px; text-align: left;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="ph-envelope-bold" style="color: var(--primary); font-size: 24px;"></i>
+                    <div>
+                      <div style="color: var(--text-muted); font-size: 0.875rem;">Email</div>
+                      <div>ermekshayloobekov@gmail.com</div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="ph-telegram-logo-bold" style="color: var(--secondary); font-size: 24px;"></i>
+                    <div>
+                      <div style="color: var(--text-muted); font-size: 0.875rem;">Telegram</div>
+                      <div>@Threatux | @MuslimKW</div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="ph-github-logo-bold" style="color: var(--accent); font-size: 24px;"></i>
+                    <div>
+                      <div style="color: var(--text-muted); font-size: 0.875rem;">GitHub</div>
+                      <div>github.com/VulWat1</div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="ph-robot-bold" style="color: var(--warning); font-size: 24px;"></i>
+                    <div>
+                      <div style="color: var(--text-muted); font-size: 0.875rem;">Demo Bot</div>
+                      <div><a href="https://t.me/Spokgustabot" style="color: var(--primary); text-decoration: none;">@Spokgustabot</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="cta-button" data-aos="zoom-in" data-aos-delay="300" onclick="window.open('https://t.me/Spokgustabot', '_blank')">
+                <i class="ph-rocket-launch-bold"></i>
+                Попробовать Smart University
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+      <button class="nav-btn" id="prevBtn">
+        <i class="ph-arrow-left-bold"></i>
+        <span>Назад</span>
+      </button>
+      <button class="nav-btn" id="homeBtn">
+        <i class="ph-house-bold"></i>
+        <span>Начало</span>
+      </button>
+      <button class="nav-btn" id="nextBtn">
+        <span>Вперёд</span>
+        <i class="ph-arrow-right-bold"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: false,
+      mirror: false
+    });
+
+    // Loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1000);
+    });
+
+    // Initialize Particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ['#6366f1', '#06b6d4', '#10b981']
+        },
+        shape: {
+          type: 'circle'
+        },
+        opacity: {
+          value: 0.3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#6366f1',
+          opacity: 0.15,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.8,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 140,
+            line_linked: {
+              opacity: 0.3
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Initialize Swiper with fade effect for slides disappearing
+    const swiper = new Swiper('#mainSwiper', {
+      direction: 'horizontal',
+      loop: false,
+      speed: 800,
+      spaceBetween: 0,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      mousewheel: {
+        sensitivity: 1,
+        releaseOnEdges: true,
+      },
+      on: {
+        slideChange: function() {
+          updateProgress();
+          updateNavButtons();
+          // Reset AOS animations for new slide
+          setTimeout(() => {
+            AOS.refresh();
+          }, 100);
+        },
+        slideChangeTransitionStart: function() {
+          // Reset slide content animation
+          const activeSlide = this.slides[this.activeIndex];
+          const slideContent = activeSlide.querySelector('.slide-content');
+          if (slideContent) {
+            slideContent.style.animation = 'none';
+            setTimeout(() => {
+              slideContent.style.animation = '';
+            }, 10);
+          }
+        }
+      }
+    });
+
+    // Navigation
+    document.getElementById('prevBtn').addEventListener('click', () => swiper.slidePrev());
+    document.getElementById('nextBtn').addEventListener('click', () => swiper.slideNext());
+    document.getElementById('homeBtn').addEventListener('click', () => swiper.slideTo(0));
+
+    // Update progress bar
+    function updateProgress() {
+      const progress = ((swiper.activeIndex + 1) / swiper.slides.length) * 100;
+      document.getElementById('progress').style.width = `${progress}%`;
+    }
+
+    // Update nav buttons
+    function updateNavButtons() {
+      document.getElementById('prevBtn').disabled = swiper.isBeginning;
+      document.getElementById('nextBtn').disabled = swiper.isEnd;
+      document.getElementById('homeBtn').disabled = swiper.activeIndex === 0;
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    let isDark = html.getAttribute('data-theme') === 'dark';
+
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeToggle.innerHTML = `<i class="ph-${isDark ? 'sun' : 'moon'}-bold" style="font-size: 24px; color: var(--text-primary);"></i>`;
+      
+      // Update particles color
+      if (window.pJSDom && window.pJSDom[0]) {
+        const pJS = window.pJSDom[0].pJS;
+        pJS.particles.color.value = isDark ? ['#6366f1', '#06b6d4', '#10b981'] : ['#4f46e5', '#0891b2', '#059669'];
+        pJS.particles.line_linked.color = isDark ? '#6366f1' : '#4f46e5';
+        pJS.fn.particlesRefresh();
+      }
+    });
+
+    // Typed.js initialization
+    let typed = null;
+    function initTyped() {
+      if (typed) typed.destroy();
+      typed = new Typed('#typed-text', {
+        strings: [
+          'Умный университет будущего',
+          'Campus 4.0',
+          'Автоматизация учебного процесса',
+          'Инновации в образовании'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|'
+      });
+    }
+    
+    // Initialize typed text when first slide is active
+    if (swiper.activeIndex === 0) {
+      initTyped();
+    }
+
+    swiper.on('slideChange', () => {
+      if (swiper.activeIndex === 0) {
+        setTimeout(initTyped, 100);
+      }
+    });
+
+    // Animated counters
+    const animateCounters = () => {
+      const counters = document.querySelectorAll('[data-count]');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+          current += step;
+          if (current < target) {
+            counter.textContent = Math.ceil(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target;
+          }
+        };
+        
+        // Check if element is in viewport
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+        
+        observer.observe(counter);
+      });
+    };
+
+    animateCounters();
+
+    // Initialize Charts
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: '#94a3b8',
+            font: {
+              size: 11
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)'
+          },
+          ticks: {
+            color: '#94a3b8',
+            font: {
+              size: 10
+            }
+          }
+        },
+        x: {
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)'
+          },
+          ticks: {
+            color: '#94a3b8',
+            font: {
+              size: 10
+            }
+          }
+        }
+      }
+    };
+
+    const initCharts = () => {
+      // Problem Chart
+      const problemCtx = document.getElementById('problemChart');
+      if (problemCtx && !problemCtx.chart) {
+        problemCtx.chart = new Chart(problemCtx, {
+          type: 'line',
+          data: {
+            labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июнь'],
+            datasets: [{
+              label: 'До внедрения',
+              data: [45, 42, 38, 35, 32, 30],
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              tension: 0.4,
+              borderWidth: 2
+            }, {
+              label: 'После Smart University',
+              data: [45, 35, 25, 15, 10, 8],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              tension: 0.4,
+              borderWidth: 2
+            }]
+          },
+          options: chartOptions
+        });
+      }
+
+      // Metrics Chart
+      const metricsCtx = document.getElementById('metricsChart');
+      if (metricsCtx && !metricsCtx.chart) {
+        metricsCtx.chart = new Chart(metricsCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Нед 1', 'Нед 2', 'Нед 3', 'Нед 4'],
+            datasets: [{
+              label: 'Пользователи',
+              data: [30, 55, 85, 120],
+              backgroundColor: 'rgba(99, 102, 241, 0.8)',
+              borderColor: '#6366f1',
+              borderWidth: 2,
+              borderRadius: 8
+            }]
+          },
+          options: chartOptions
+        });
+      }
+
+      // Architecture Chart
+      const archCtx = document.getElementById('architectureChart');
+      if (archCtx && !archCtx.chart) {
+        archCtx.chart = new Chart(archCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Backend', 'Frontend', 'Database', 'AI/ML'],
+            datasets: [{
+              data: [35, 30, 20, 15],
+              backgroundColor: [
+                'rgba(99, 102, 241, 0.8)',
+                'rgba(6, 182, 212, 0.8)',
+                'rgba(16, 185, 129, 0.8)',
+                'rgba(245, 158, 11, 0.8)'
+              
+              ],
+              borderColor: [
+                '#6366f1',
+                '#06b6d4',
+                '#10b981',
+                '#f59e0b'
+              ],
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: {
+                  color: '#94a3b8',
+                  padding: 10,
+                  font: {
+                    size: 11
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+    };
+
+    // Initialize charts when slides are shown
+    swiper.on('slideChange', () => {
+      setTimeout(() => {
+        initCharts();
+      }, 300);
+    });
+
+    // Initialize charts for first load
+    setTimeout(() => {
+      initCharts();
+    }, 1500);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      
+      switch(e.key) {
+        case 'ArrowRight':
+        case ' ':
+          e.preventDefault();
+          swiper.slideNext();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          swiper.slidePrev();
+          break;
+        case 'Home':
+          e.preventDefault();
+          swiper.slideTo(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          swiper.slideTo(swiper.slides.length - 1);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+              console.log('Fullscreen error:', err);
+            });
+          } else {
+            document.exitFullscreen();
+          }
+          break;
+        case 'Escape':
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+          break;
+      }
+    });
+
+    // Touch gestures for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        swiper.slideNext();
+      }
+      if (touchEndX > touchStartX + 50) {
+        swiper.slidePrev();
+      }
+    }
+
+    // Presentation timer
+    let presentationTimer = null;
+    let seconds = 0;
+    
+    function startTimer() {
+      presentationTimer = setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        console.log(`Presentation time: ${minutes}:${secs.toString().padStart(2, '0')}`);
+      }, 1000);
+    }
+    
+    function stopTimer() {
+      clearInterval(presentationTimer);
+    }
+    
+    // Start timer on first slide change
+    swiper.once('slideChange', startTimer);
+    
+    // Stop timer on last slide
+    swiper.on('slideChange', () => {
+      if (swiper.isEnd) {
+        stopTimer();
+      }
+    });
+
+    // Auto-play functionality (optional)
+    let autoplayInterval = null;
+    let isAutoplay = false;
+    
+    function toggleAutoplay() {
+      isAutoplay = !isAutoplay;
+      
+      if (isAutoplay) {
+        autoplayInterval = setInterval(() => {
+          if (!swiper.isEnd) {
+            swiper.slideNext();
+          } else {
+            toggleAutoplay();
+          }
+        }, 10000); // 10 seconds per slide
+      } else {
+        clearInterval(autoplayInterval);
+      }
+    }
+    
+    // Add autoplay toggle with 'a' key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'a' || e.key === 'A') {
+        toggleAutoplay();
+        console.log('Autoplay:', isAutoplay ? 'ON' : 'OFF');
+      }
+    });
+
+    // Initial setup
+    updateProgress();
+    updateNavButtons();
+
+    // Performance optimization - lazy load heavy content
+    const lazyLoadObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target.querySelector('video');
+          if (video && !video.src) {
+            video.src = video.dataset.src || 'video.mp4';
+          }
+        }
+      });
+    }, {
+      rootMargin: '100px'
+    });
+
+    // Observe all slides for lazy loading
+    document.querySelectorAll('.swiper-slide').forEach(slide => {
+      lazyLoadObserver.observe(slide);
+    });
+
+    // Add presentation controls hint
+    const showHints = () => {
+      const hints = [
+        '← → - навигация',
+        'Space - следующий слайд',
+        'F - полный экран',
+        'Home/End - начало/конец',
+        'A - автовоспроизведение'
+      ];
+      
+      console.log('%c🎯 Управление презентацией:', 'color: #6366f1; font-size: 16px; font-weight: bold');
+      hints.forEach(hint => {
+        console.log(`%c${hint}`, 'color: #10b981; font-size: 14px');
+      });
+    };
+    
+    // Show hints on load
+    setTimeout(showHints, 2000);
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      });
+    });
+
+    // Add slide indicators (dots)
+    const createSlideIndicators = () => {
+      const indicatorsContainer = document.createElement('div');
+      indicatorsContainer.className = 'slide-indicators';
+      indicatorsContainer.style.cssText = `
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 50;
+      `;
+      
+      for (let i = 0; i < swiper.slides.length; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'indicator-dot';
+        dot.style.cssText = `
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          border: none;
+          background: rgba(148, 163, 184, 0.3);
+          cursor: pointer;
+          transition: all 0.3s;
+        `;
+        
+        dot.addEventListener('click', () => {
+          swiper.slideTo(i);
+        });
+        
+        indicatorsContainer.appendChild(dot);
+      }
+      
+      document.querySelector('.main-container').appendChild(indicatorsContainer);
+      
+      // Update active indicator
+      const updateIndicators = () => {
+        const dots = indicatorsContainer.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, index) => {
+          if (index === swiper.activeIndex) {
+            dot.style.background = 'var(--primary)';
+            dot.style.width = '24px';
+          } else {
+            dot.style.background = 'rgba(148, 163, 184, 0.3)';
+            dot.style.width = '8px';
+          }
+        });
+      };
+      
+      swiper.on('slideChange', updateIndicators);
+      updateIndicators();
+    };
+    
+    createSlideIndicators();
+
+    // Add speaker notes (console)
+    const speakerNotes = {
+      0: "Добро пожаловать! Smart University - это революционная платформа для автоматизации учебного процесса.",
+      1: "Основная проблема - студенты теряют до 30% времени на организационные вопросы.",
+      2: "Наше решение объединяет все необходимые инструменты в единой экосистеме.",
+      3: "Мы используем современный технологический стек для максимальной производительности.",
+      4: "Наша команда состоит из опытных специалистов в области разработки и дизайна.",
+      5: "За первый месяц мы достигли впечатляющих результатов.",
+      6: "План развития включает масштабирование и новые функции.",
+      7: "Спасибо за внимание! Готовы ответить на ваши вопросы."
+    };
+    
+    swiper.on('slideChange', () => {
+      const note = speakerNotes[swiper.activeIndex];
+      if (note) {
+        console.log('%c📝 Заметка спикера:', 'color: #f59e0b; font-size: 14px; font-weight: bold');
+        console.log(`%c${note}`, 'color: #cbd5e1; font-size: 13px; line-height: 1.5');
+      }
+    });
+
+    // Export presentation to PDF (print)
+    const exportToPDF = () => {
+      window.print();
+    };
+    
+    // Add print styles
+    const printStyles = document.createElement('style');
+    printStyles.innerHTML = `
+      @media print {
+        body {
+          background: white !important;
+        }
+        
+        .background-container,
+        .nav-controls,
+        .progress-bar,
+        .theme-toggle,
+        .slide-indicators,
+        .loader {
+          display: none !important;
+        }
+        
+        .swiper-slide {
+          page-break-after: always;
+          opacity: 1 !important;
+          visibility: visible !important;
+          position: relative !important;
+          height: 100vh;
+        }
+        
+        .slide-content {
+          animation: none !important;
+        }
+        
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    `;
+    document.head.appendChild(printStyles);
+    
+    // Add export button (P key)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' || e.key === 'P') {
+        if (e.ctrlKey || e.metaKey) return; // Don't interfere with browser print
+        e.preventDefault();
+        exportToPDF();
+      }
+    });
+
+    // Analytics tracking (optional)
+    const trackSlideView = (slideIndex) => {
+      // You can add analytics here
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'slide_view', {
+          'slide_number': slideIndex + 1,
+          'slide_title': document.querySelector(`.swiper-slide:nth-child(${slideIndex + 1}) .animated-heading`)?.textContent
+        });
+      }
+    };
+    
+    swiper.on('slideChange', () => {
+      trackSlideView(swiper.activeIndex);
+    });
+
+    // Accessibility improvements
+    const announceSlide = () => {
+      const slideNumber = swiper.activeIndex + 1;
+      const totalSlides = swiper.slides.length;
+      const heading = document.querySelector('.swiper-slide-active .animated-heading')?.textContent || 'Слайд';
+      
+      const announcement = `Слайд ${slideNumber} из ${totalSlides}: ${heading}`;
+      
+      // Create or update aria-live region
+      let liveRegion = document.getElementById('aria-live-region');
+      if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.id = 'aria-live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.style.position = 'absolute';
+        liveRegion.style.left = '-10000px';
+        liveRegion.style.width = '1px';
+        liveRegion.style.height = '1px';
+        liveRegion.style.overflow = 'hidden';
+        document.body.appendChild(liveRegion);
+      }
+      
+      liveRegion.textContent = announcement;
+    };
+    
+    swiper.on('slideChange', announceSlide);
+
+    // Custom cursor for presentation mode
+    const createPresentationCursor = () => {
+      const cursor = document.createElement('div');
+      cursor.className = 'presentation-cursor';
+      cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transition: transform 0.1s;
+        opacity: 0;
+      `;
+      document.body.appendChild(cursor);
+      
+      let isPresenting = false;
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'c' || e.key === 'C') {
+          isPresenting = !isPresenting;
+          cursor.style.opacity = isPresenting ? '1' : '0';
+        }
+      });
+      
+      document.addEventListener('mousemove', (e) => {
+        if (isPresenting) {
+          cursor.style.left = e.clientX - 10 + 'px';
+          cursor.style.top = e.clientY - 10 + 'px';
+        }
+      });
+      
+      document.addEventListener('click', () => {
+        if (isPresenting) {
+          cursor.style.transform = 'scale(1.5)';
+          setTimeout(() => {
+            cursor.style.transform = 'scale(1)';
+          }, 200);
+        }
+      });
+    };
+    
+    createPresentationCursor();
+
+    // Final initialization message
+    console.log('%c🚀 Smart University Presentation Ready!', 'color: #10b981; font-size: 20px; font-weight: bold');
+    console.log('%c© 2024 AuroraSys Team', 'color: #6366f1; font-size: 12px');
+  </script>
+</body>
+</html>
+
